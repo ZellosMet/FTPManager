@@ -26,6 +26,8 @@ namespace FtpApplication
         public string CurrenLocalPath { get; private set; } = Environment.CurrentDirectory;
         //Текущий путь облака       
         public string CurrenCloudPath { get; private set; } = "/";
+        //connection - данные подключеня
+        //text_box - текстовое поле из которого берётся содержимое файла
         public FileManager(ConnectionDetails connection, RichTextBox text_box)
         {
             InitializeComponent();
@@ -49,9 +51,12 @@ namespace FtpApplication
             //Заполняем пути
             tb_LocalCurrenPath.Text = CurrenLocalPath;
             l_CloudCurrentPath.Text = CurrenCloudPath;
-            //Получаем содержимое каталога FTP сервера            
+            //Получаем содержимое каталога FTP сервера
             ftp.GetLocalAndCloudListing(this, lv_CloudList, lv_LocalList, CurrenLocalPath, CurrenCloudPath, true);
+            //Получаем RichTextBox родительской формы
             rich_text_box = text_box;
+            //Выаодим имя подключения
+            l_CloudPath.Text += connect.ConnectionName;
         }
         //событие перехода по локальным коталагам
         private void lv_LocalList_DoubleClick(object sender, EventArgs e)
@@ -88,7 +93,7 @@ namespace FtpApplication
         //Событие перехода по каталогам FTP сервера
         private void lv_CloudList_DoubleClick(object sender, EventArgs e)
         {
-            ListView lv = (ListView)sender;
+            ListView lv = (ListView)sender;            
             string type = lv.SelectedItems[0].SubItems[1].Text;
             switch (type)
             {

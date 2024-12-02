@@ -83,9 +83,9 @@
             l_CloudPath.AutoSize = true;
             l_CloudPath.Location = new Point(382, 19);
             l_CloudPath.Name = "l_CloudPath";
-            l_CloudPath.Size = new Size(80, 20);
+            l_CloudPath.Size = new Size(87, 20);
             l_CloudPath.TabIndex = 4;
-            l_CloudPath.Text = "Cloud Path";
+            l_CloudPath.Text = "Cloud Path: ";
             // 
             // l_CloudCurrentPath
             // 

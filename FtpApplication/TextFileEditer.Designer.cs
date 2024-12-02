@@ -41,7 +41,6 @@
             tsmi_ConnectionToCloud = new ToolStripMenuItem();
             tsmi_CreateConnection = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
-            tsmi_DisconnectFromCloud = new ToolStripMenuItem();
             cms_DeleteConnection = new ContextMenuStrip(components);
             tsmi_Delete = new ToolStripMenuItem();
             ms_MainMenu.SuspendLayout();
@@ -80,20 +79,20 @@
             // tsmi_LocalSave
             // 
             tsmi_LocalSave.Name = "tsmi_LocalSave";
-            tsmi_LocalSave.Size = new Size(224, 26);
+            tsmi_LocalSave.Size = new Size(166, 26);
             tsmi_LocalSave.Text = "Local Save";
             tsmi_LocalSave.Click += tsmi_LocalSave_Click;
             // 
             // tsmi_CloudSave
             // 
             tsmi_CloudSave.Name = "tsmi_CloudSave";
-            tsmi_CloudSave.Size = new Size(224, 26);
+            tsmi_CloudSave.Size = new Size(166, 26);
             tsmi_CloudSave.Text = "Cloud Save";
             tsmi_CloudSave.Click += tsmi_CloudSave_Click;
             // 
             // tsmi_Cloud
             // 
-            tsmi_Cloud.DropDownItems.AddRange(new ToolStripItem[] { tsmi_ConnectionToCloud, tsmi_DisconnectFromCloud });
+            tsmi_Cloud.DropDownItems.AddRange(new ToolStripItem[] { tsmi_ConnectionToCloud });
             tsmi_Cloud.Name = "tsmi_Cloud";
             tsmi_Cloud.Size = new Size(62, 24);
             tsmi_Cloud.Text = "Cloud";
@@ -102,26 +101,20 @@
             // 
             tsmi_ConnectionToCloud.DropDownItems.AddRange(new ToolStripItem[] { tsmi_CreateConnection, toolStripSeparator1 });
             tsmi_ConnectionToCloud.Name = "tsmi_ConnectionToCloud";
-            tsmi_ConnectionToCloud.Size = new Size(248, 26);
+            tsmi_ConnectionToCloud.Size = new Size(224, 26);
             tsmi_ConnectionToCloud.Text = "Connect to Cloud";
             // 
             // tsmi_CreateConnection
             // 
             tsmi_CreateConnection.Name = "tsmi_CreateConnection";
-            tsmi_CreateConnection.Size = new Size(193, 26);
+            tsmi_CreateConnection.Size = new Size(224, 26);
             tsmi_CreateConnection.Text = "Create Connect";
             tsmi_CreateConnection.Click += tsmi_CreateConnection_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(190, 6);
-            // 
-            // tsmi_DisconnectFromCloud
-            // 
-            tsmi_DisconnectFromCloud.Name = "tsmi_DisconnectFromCloud";
-            tsmi_DisconnectFromCloud.Size = new Size(248, 26);
-            tsmi_DisconnectFromCloud.Text = "Disconnect  from Cloud";
+            toolStripSeparator1.Size = new Size(221, 6);
             // 
             // cms_DeleteConnection
             // 
@@ -168,7 +161,6 @@
         private ToolStripMenuItem tsmi_CloudSave;
         private ToolStripMenuItem tsmi_Cloud;
         private ToolStripMenuItem tsmi_ConnectionToCloud;
-        private ToolStripMenuItem tsmi_DisconnectFromCloud;
         private ToolStripMenuItem tsmi_CreateConnection;
         private ToolStripSeparator toolStripSeparator1;
         private ContextMenuStrip cms_DeleteConnection;

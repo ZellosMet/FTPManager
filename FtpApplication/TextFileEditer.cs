@@ -128,11 +128,11 @@ namespace FtpApplication
         }
         //Событие сохранения файла на FTP сервере
         private void tsmi_CloudSave_Click(object sender, EventArgs e)
-        {   
+        {
             //Проверяем открыт ли Менеджер Файлов(проверка подключения к FTP серверу)
             if (FileManager == null || FileManager.Created == false)
             {
-                MessageBox.Show 
+                MessageBox.Show
                     (
                         $"No active connection",
                         "Save Failed",
@@ -147,10 +147,13 @@ namespace FtpApplication
             string file_name = "";
             //Получаем имя файла из формы
             if (CFN.ShowDialog(this) == DialogResult.OK)
-            { 
+            {
                 file_name = CFN.FileName + ".txt";
                 CFN.Close();
             }
+            else            
+                return;
+            
             //Временно сохраняем файл
             using (StreamWriter writer = new StreamWriter(file_name, false))
             {
@@ -159,7 +162,7 @@ namespace FtpApplication
             //Создаём подключение к FTP серверу
             FtpManager FM = new FtpManager(current_connection);
             //Отправляем файл на FTP сервер
-            FM.SendFileToCloud(file_name, FileManager.CurrenCloudPath);            
+            FM.SendFileToCloud(file_name, FileManager.CurrenCloudPath);
         }
     }
 }
