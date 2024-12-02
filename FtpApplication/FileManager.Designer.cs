@@ -35,8 +35,6 @@
             l_CloudPath = new Label();
             l_CloudCurrentPath = new Label();
             b_CurrentPath = new Button();
-            b_ToLocale = new Button();
-            b_ToCloud = new Button();
             b_Refrash = new Button();
             SuspendLayout();
             // 
@@ -106,24 +104,6 @@
             b_CurrentPath.Text = "...";
             b_CurrentPath.UseVisualStyleBackColor = true;
             // 
-            // b_ToLocale
-            // 
-            b_ToLocale.Location = new Point(294, 231);
-            b_ToLocale.Name = "b_ToLocale";
-            b_ToLocale.Size = new Size(35, 29);
-            b_ToLocale.TabIndex = 7;
-            b_ToLocale.Text = "<-";
-            b_ToLocale.UseVisualStyleBackColor = true;
-            // 
-            // b_ToCloud
-            // 
-            b_ToCloud.Location = new Point(343, 231);
-            b_ToCloud.Name = "b_ToCloud";
-            b_ToCloud.Size = new Size(35, 29);
-            b_ToCloud.TabIndex = 8;
-            b_ToCloud.Text = "->";
-            b_ToCloud.UseVisualStyleBackColor = true;
-            // 
             // b_Refrash
             // 
             b_Refrash.Location = new Point(566, 15);
@@ -140,8 +120,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(672, 450);
             Controls.Add(b_Refrash);
-            Controls.Add(b_ToCloud);
-            Controls.Add(b_ToLocale);
             Controls.Add(b_CurrentPath);
             Controls.Add(l_CloudCurrentPath);
             Controls.Add(l_CloudPath);
@@ -164,8 +142,6 @@
         private Label l_CloudPath;
         private Label l_CloudCurrentPath;
         private Button b_CurrentPath;
-        private Button b_ToLocale;
-        private Button b_ToCloud;
         private Button b_Refrash;
     }
 }

@@ -1,4 +1,4 @@
-using System.Text.Json;
+п»їusing System.Text.Json;
 using System;
 using System.Windows.Forms;
 using FluentFTP.Helpers;
@@ -8,47 +8,47 @@ using System.IO;
 
 namespace FtpApplication
 {
-    //Главноя форма редактора текста
+    //Р“Р»Р°РІРЅРѕСЏ С„РѕСЂРјР° СЂРµРґР°РєС‚РѕСЂР° С‚РµРєСЃС‚Р°
     public partial class TextFileEditer : Form
     {
         FileManager FileManager;
         ConnectionDetails current_connection;
-        //Создание списка подключений
+        //РЎРѕР·РґР°РЅРёРµ СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№
         List<ConnectionDetails> connection_details_list = new List<ConnectionDetails>();
-        //Путь для сожранения файла
+        //РџСѓС‚СЊ РґР»СЏ СЃРѕР¶СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р°
         string file_path_save = string.Empty;
-        //Путь открытия вайла
+        //РџСѓС‚СЊ РѕС‚РєСЂС‹С‚РёСЏ РІР°Р№Р»Р°
         string file_path_open = string.Empty;
-        //Выбранное соеденение на удаления
+        //Р’С‹Р±СЂР°РЅРЅРѕРµ СЃРѕРµРґРµРЅРµРЅРёРµ РЅР° СѓРґР°Р»РµРЅРёСЏ
         string current_connection_for_delete = string.Empty;
         public TextFileEditer()
         {
             InitializeComponent();
-            //Фильтр файлов для для сожраненеия
+            //Р¤РёР»СЊС‚СЂ С„Р°Р№Р»РѕРІ РґР»СЏ РґР»СЏ СЃРѕР¶СЂР°РЅРµРЅРµРёСЏ
             sfd_Save.Filter = "Text files(*.txt)|*.txt";
             ofd_Open.Filter = "Text files(*.txt)|*.txt";
         }
-        //Событие создание нового подключения
+        //РЎРѕР±С‹С‚РёРµ СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
         private void tsmi_CreateConnection_Click(object sender, EventArgs e)
         {
-            //Создание формы для создания нового подключения
+            //РЎРѕР·РґР°РЅРёРµ С„РѕСЂРјС‹ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
             CreateConnectionForm CCF = new CreateConnectionForm(connection_details_list);
             CCF.ShowDialog(this);
-            //Обновление списка подключений
+            //РћР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№
             ReloadeConnectionList();
         }
-        //Событие подключение к FTP-серверу
+        //РЎРѕР±С‹С‚РёРµ РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє FTP-СЃРµСЂРІРµСЂСѓ
         private void Connection_Click(object sender, EventArgs e)
         {
-            //Получение объекта подключения
+            //РџРѕР»СѓС‡РµРЅРёРµ РѕР±СЉРµРєС‚Р° РїРѕРґРєР»СЋС‡РµРЅРёСЏ
             ConnectionDetails connection = connection_details_list.First(conn => conn.ConnectionName == sender.ToString());
-            //Запоминаем параметры текущего подключения
+            //Р—Р°РїРѕРјРёРЅР°РµРј РїР°СЂР°РјРµС‚СЂС‹ С‚РµРєСѓС‰РµРіРѕ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
             current_connection = connection;
-            //Создаём форму файлового менеджера
+            //РЎРѕР·РґР°С‘Рј С„РѕСЂРјСѓ С„Р°Р№Р»РѕРІРѕРіРѕ РјРµРЅРµРґР¶РµСЂР°
             FileManager = new FileManager(connection, rtb_Text);
             FileManager.Show();
         }
-        //Сохранение списка подключений при закрытии формы
+        //РЎРѕС…СЂР°РЅРµРЅРёРµ СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№ РїСЂРё Р·Р°РєСЂС‹С‚РёРё С„РѕСЂРјС‹
         private void TextFileEditer_FormClosing(object sender, FormClosingEventArgs e)
         {
             using (FileStream fs = new FileStream("connection_list.connect", FileMode.Create))
@@ -56,7 +56,7 @@ namespace FtpApplication
                 JsonSerializer.Serialize<List<ConnectionDetails>>(fs, connection_details_list);
             }
         }
-        //Закгрузка списка подключений при открытии формы
+        //Р—Р°РєРіСЂСѓР·РєР° СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№ РїСЂРё РѕС‚РєСЂС‹С‚РёРё С„РѕСЂРјС‹
         private void TextFileEditer_Load(object sender, EventArgs e)
         {
             using (FileStream fs = new FileStream("connection_list.connect", FileMode.Open))
@@ -65,48 +65,48 @@ namespace FtpApplication
                 ReloadeConnectionList();
             }
         }
-        //Событие вызова контекстного меню для подключения
+        //РЎРѕР±С‹С‚РёРµ РІС‹Р·РѕРІР° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
         private void ContextMenuDelete_RightClick(object sender, MouseEventArgs e)
         {
-            //Проверка нажатия правой кнопкой
+            //РџСЂРѕРІРµСЂРєР° РЅР°Р¶Р°С‚РёСЏ РїСЂР°РІРѕР№ РєРЅРѕРїРєРѕР№
             if (e.Button == MouseButtons.Right)
             {
-                //Принудительное отображение главного меню
+                //РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РіР»Р°РІРЅРѕРіРѕ РјРµРЅСЋ
                 tsmi_Cloud.DropDown.AutoClose = false;
                 tsmi_ConnectionToCloud.DropDown.AutoClose = false;
-                //Отображение пункта контекстного меню
+                //РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РїСѓРЅРєС‚Р° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ
                 cms_DeleteConnection.Show(Cursor.Position);
-                //Получение имени подключения для удаления
+                //РџРѕР»СѓС‡РµРЅРёРµ РёРјРµРЅРё РїРѕРґРєР»СЋС‡РµРЅРёСЏ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
                 current_connection_for_delete = sender.ToString();
             }
         }
-        //Событие удаления подключения из списка
+        //РЎРѕР±С‹С‚РёРµ СѓРґР°Р»РµРЅРёСЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РёР· СЃРїРёСЃРєР°
         private void cms_DeleteConnection_Click(object sender, EventArgs e)
         {
-            //Принудительное закрытие главного меню
+            //РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕРµ Р·Р°РєСЂС‹С‚РёРµ РіР»Р°РІРЅРѕРіРѕ РјРµРЅСЋ
             tsmi_Cloud.DropDown.AutoClose = true;
             tsmi_Cloud.DropDown.Close();
             tsmi_ConnectionToCloud.DropDown.AutoClose = true;
             tsmi_ConnectionToCloud.DropDown.Close();
-            //Получение подключения из списка
+            //РџРѕР»СѓС‡РµРЅРёРµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РёР· СЃРїРёСЃРєР°
             ConnectionDetails connection = connection_details_list.First(conn => conn.ConnectionName == current_connection_for_delete);
-            //Удаление подключения из списка
+            //РЈРґР°Р»РµРЅРёРµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РёР· СЃРїРёСЃРєР°
             if (connection != null)
                 connection_details_list.Remove(connection);
-            //Обновление списка подключений
+            //РћР±РЅРѕРІР»РµРЅРёРµ СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№
             ReloadeConnectionList();
         }
-        //Метод обновления списка подключения
+        //РњРµС‚РѕРґ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ
         private void ReloadeConnectionList()
         {
-            //Очистка списка
+            //РћС‡РёСЃС‚РєР° СЃРїРёСЃРєР°
             tsmi_ConnectionToCloud.DropDownItems.Clear();
-            //Добавление базового элемента создания подключения
+            //Р”РѕР±Р°РІР»РµРЅРёРµ Р±Р°Р·РѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЃРѕР·РґР°РЅРёСЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
             ToolStripMenuItem item = new ToolStripMenuItem("Create Connect");
             item.Click += tsmi_CreateConnection_Click;
             tsmi_ConnectionToCloud.DropDownItems.Add(item);
             tsmi_ConnectionToCloud.DropDownItems.Add(new ToolStripSeparator());
-            //Загрузка списка подключений в главное меню
+            //Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№ РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ
             foreach (ConnectionDetails connection in connection_details_list)
             {
                 ToolStripMenuItem menu_item = new ToolStripMenuItem(connection.ConnectionName);
@@ -115,7 +115,7 @@ namespace FtpApplication
                 tsmi_ConnectionToCloud.DropDownItems.Add(menu_item);
             }
         }
-        //Событие локального сохранения файла
+        //РЎРѕР±С‹С‚РёРµ Р»РѕРєР°Р»СЊРЅРѕРіРѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р°
         private void tsmi_LocalSave_Click(object sender, EventArgs e)
         {
             if (sfd_Save.ShowDialog() == DialogResult.OK)
@@ -126,10 +126,10 @@ namespace FtpApplication
                 }
             }
         }
-        //Событие сохранения файла на FTP сервере
+        //РЎРѕР±С‹С‚РёРµ СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»Р° РЅР° FTP СЃРµСЂРІРµСЂРµ
         private void tsmi_CloudSave_Click(object sender, EventArgs e)
         {   
-            //Проверяем открыт ли Менеджер Файлов(проверка подключения к FTP серверу)
+            //РџСЂРѕРІРµСЂСЏРµРј РѕС‚РєСЂС‹С‚ Р»Рё РњРµРЅРµРґР¶РµСЂ Р¤Р°Р№Р»РѕРІ(РїСЂРѕРІРµСЂРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє FTP СЃРµСЂРІРµСЂСѓ)
             if (FileManager == null || FileManager.Created == false)
             {
                 MessageBox.Show 
@@ -142,23 +142,23 @@ namespace FtpApplication
                 current_connection = null;
                 return;
             }
-            //Создаём форму для получения имени файла от пользователя
+            //РЎРѕР·РґР°С‘Рј С„РѕСЂРјСѓ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РёРјРµРЅРё С„Р°Р№Р»Р° РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
             CreateFileName CFN = new CreateFileName();
             string file_name = "";
-            //Получаем имя файла из формы
+            //РџРѕР»СѓС‡Р°РµРј РёРјСЏ С„Р°Р№Р»Р° РёР· С„РѕСЂРјС‹
             if (CFN.ShowDialog(this) == DialogResult.OK)
             { 
                 file_name = CFN.FileName + ".txt";
                 CFN.Close();
             }
-            //Временно сохраняем файл
+            //Р’СЂРµРјРµРЅРЅРѕ СЃРѕС…СЂР°РЅСЏРµРј С„Р°Р№Р»
             using (StreamWriter writer = new StreamWriter(file_name, false))
             {
                 writer.Write(rtb_Text.Text);
             }
-            //Создаём подключение к FTP серверу
+            //РЎРѕР·РґР°С‘Рј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє FTP СЃРµСЂРІРµСЂСѓ
             FtpManager FM = new FtpManager(current_connection);
-            //Отправляем файл на FTP сервер
+            //РћС‚РїСЂР°РІР»СЏРµРј С„Р°Р№Р» РЅР° FTP СЃРµСЂРІРµСЂ
             FM.SendFileToCloud(file_name, FileManager.CurrenCloudPath);            
         }
     }
